@@ -110,7 +110,7 @@ As tarefas abaixo estão em ordem progressiva, alinhadas com a sequencia visual 
 
 - [x] Fase 1 — Fundacao - tipos & layout base
 - [x] Fase 2 — Histórico - bolhas, lista, empty state, auto-scroll
-- [ ] Fase 3 — Input - card fixo, textarea auto-resize, envio
+- [x] Fase 3 — Input - card fixo, textarea auto-resize, envio
 - [ ] Fase 4 — Toggles - componente, integração, borda roxa
 - [ ] Fase 5 — Polimento - ajustes visuais + lint/build
 
@@ -134,11 +134,11 @@ As tarefas abaixo estão em ordem progressiva, alinhadas com a sequencia visual 
 
 ### Tarefa 3: Input - card fixo, textarea auto-resize e envio
 
-- [ ] Implementar o compositor em card branco no rodapé com altura adaptável ao texto.
-- [ ] Criar textarea multilinha com limite visual e crescimento conforme conteúdo.
-- [ ] Enviar com botão e Enter; Shift+Enter deve inserir quebra de linha sem mandar.
-- [ ] Desabilitar o botão quando o texto estiver vazio ou contiver apenas espaços.
-- [ ] Ao enviar, limpar o campo e manter a seleção de autoria ativa.
+- [x] Implementar o compositor em card branco no rodapé com altura adaptável ao texto.
+- [x] Criar textarea multilinha com limite visual e crescimento conforme conteúdo.
+- [x] Enviar com botão e Enter; Shift+Enter deve inserir quebra de linha sem mandar.
+- [x] Desabilitar o botão quando o texto estiver vazio ou contiver apenas espaços.
+- [x] Ao enviar, limpar o campo e manter a seleção de autoria ativa.
 
 **Pronto quando:** o fluxo de composição e envio produz uma mensagem válida por ação e o campo fica consistente com as regras de teclado.
 
