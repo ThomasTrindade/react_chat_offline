@@ -108,7 +108,7 @@ As tarefas abaixo estão em ordem progressiva, alinhadas com a sequencia visual 
 
 ### Checklist de progresso
 
-- [ ] Fase 1 — Fundacao - tipos & layout base
+- [x] Fase 1 — Fundacao - tipos & layout base
 - [ ] Fase 2 — Histórico - bolhas, lista, empty state, auto-scroll
 - [ ] Fase 3 — Input - card fixo, textarea auto-resize, envio
 - [ ] Fase 4 — Toggles - componente, integração, borda roxa
@@ -116,10 +116,10 @@ As tarefas abaixo estão em ordem progressiva, alinhadas com a sequencia visual 
 
 ### Tarefa 1: Fundacao - tipos e layout base
 
-- [ ] Confirmar os pontos de entrada, estilos globais e integraçao Tailwind existentes.
-- [ ] Definir os tipos de domínio em `src/types` usando `type` para autoria e mensagem.
-- [ ] Montar a estrutura base da tela com fundo marrom claro, coluna central limitada e altura da viewport.
-- [ ] Preparar a separação entre histórico rolável e compositor fixo no rodapé.
+- [x] Confirmar os pontos de entrada, estilos globais e integraçao Tailwind existentes.
+- [x] Definir os tipos de domínio em `src/types` usando `type` para autoria e mensagem.
+- [x] Montar a estrutura base da tela com fundo marrom claro, coluna central limitada e altura da viewport.
+- [x] Preparar a separação entre histórico rolável e compositor fixo no rodapé.
 
 **Pronto quando:** a aplicação renderiza a estrutura vazia de chat sem erros e o contrato de mensagem já está compartilhado entre componentes.
 
