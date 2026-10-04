@@ -1,0 +1,32 @@
+import type { RefObject } from 'react'
+import type { ChatMessage } from '../types/message'
+import MessageBubble from './MessageBubble'
+
+type ChatHistoryProps = {
+  messages: ChatMessage[]
+  listRef: RefObject<HTMLDivElement | null>
+}
+
+export default function ChatHistory({ messages, listRef }: ChatHistoryProps) {
+  return (
+    <div
+      ref={listRef}
+      role="log"
+      aria-live="polite"
+      aria-label="Histórico de mensagens"
+      className="flex-1 overflow-y-auto px-3 pb-6 pt-4 sm:px-4"
+    >
+      {messages.length === 0 ? (
+        <div className="flex h-full min-h-[200px] items-center justify-center text-center text-sm text-stone-500">
+          Nenhuma mensagem ainda.
+        </div>
+      ) : (
+        <div className="space-y-3">
+          {messages.map((message) => (
+            <MessageBubble key={message.id} message={message} />
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
