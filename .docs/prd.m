@@ -109,7 +109,7 @@ As tarefas abaixo estão em ordem progressiva, alinhadas com a sequencia visual 
 ### Checklist de progresso
 
 - [x] Fase 1 — Fundacao - tipos & layout base
-- [ ] Fase 2 — Histórico - bolhas, lista, empty state, auto-scroll
+- [x] Fase 2 — Histórico - bolhas, lista, empty state, auto-scroll
 - [ ] Fase 3 — Input - card fixo, textarea auto-resize, envio
 - [ ] Fase 4 — Toggles - componente, integração, borda roxa
 - [ ] Fase 5 — Polimento - ajustes visuais + lint/build
@@ -125,10 +125,10 @@ As tarefas abaixo estão em ordem progressiva, alinhadas com a sequencia visual 
 
 ### Tarefa 2: Histórico - bolhas, lista, estado vazio e auto-scroll
 
-- [ ] Criar a lista de mensagens e os itens individuais em `src/components`.
-- [ ] Renderizar Usuário à direita e Robô à esquerda, com identificação textual e preservação de quebra de linha.
-- [ ] Exibir estado vazio sem mensagens fictícias e manter ordem de envio.
-- [ ] Rolar automaticamente até a mensagem mais recente após inserir nova mensagem.
+- [x] Criar a lista de mensagens e os itens individuais em `src/components`.
+- [x] Renderizar Usuário à direita e Robô à esquerda, com identificação textual e preservação de quebra de linha.
+- [x] Exibir estado vazio sem mensagens fictícias e manter ordem de envio.
+- [x] Rolar automaticamente até a mensagem mais recente após inserir nova mensagem.
 
 **Pronto quando:** uma lista tipada de mensagens pode ser apresentada na ordem correta e a área de histórico continua navegável.
 
