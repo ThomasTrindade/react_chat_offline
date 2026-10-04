@@ -111,7 +111,7 @@ As tarefas abaixo estão em ordem progressiva, alinhadas com a sequencia visual 
 - [x] Fase 1 — Fundacao - tipos & layout base
 - [x] Fase 2 — Histórico - bolhas, lista, empty state, auto-scroll
 - [x] Fase 3 — Input - card fixo, textarea auto-resize, envio
-- [ ] Fase 4 — Toggles - componente, integração, borda roxa
+- [x] Fase 4 — Toggles - componente, integração, borda roxa
 - [ ] Fase 5 — Polimento - ajustes visuais + lint/build
 
 ### Tarefa 1: Fundacao - tipos e layout base
@@ -144,10 +144,10 @@ As tarefas abaixo estão em ordem progressiva, alinhadas com a sequencia visual 
 
 ### Tarefa 4: Toggles - componente, integração e borda roxa
 
-- [ ] Adicionar o seletor de autoria em um controle acessível por teclado.
-- [ ] Manter a autoria atual no estado da tela e reaproveitar o valor durante o envio.
-- [ ] Destacar o compositor com borda roxa somente quando a autoria ativa for Robô.
-- [ ] Garantir feedback visível para seleção, foco e estados desabilitados.
+- [x] Adicionar o seletor de autoria em um controle acessível por teclado.
+- [x] Manter a autoria atual no estado da tela e reaproveitar o valor durante o envio.
+- [x] Destacar o compositor com borda roxa somente quando a autoria ativa for Robô.
+- [x] Garantir feedback visível para seleção, foco e estados desabilitados.
 
 **Pronto quando:** a alternância de Usuário/Robô funciona sem mouse e o destaque visual corresponde ao modo selecionado.
 

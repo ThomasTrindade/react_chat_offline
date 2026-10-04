@@ -17,6 +17,7 @@ export default function ChatComposer({
   onSubmit,
 }: ChatComposerProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
+  const authorButtonRefs = useRef<HTMLButtonElement[]>([])
   const isRobot = author === 'robot'
   const isDisabled = draft.trim().length === 0
 
@@ -35,6 +36,31 @@ export default function ChatComposer({
         onSubmit()
       }
     }
+  }
+
+  const handleAuthorKeyDown = (
+    event: KeyboardEvent<HTMLButtonElement>,
+    currentAuthor: Author,
+  ) => {
+    const currentIndex = currentAuthor === 'user' ? 0 : 1
+    let nextIndex = currentIndex
+
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+      nextIndex = (currentIndex + 1) % 2
+    } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+      nextIndex = (currentIndex + 1) % 2
+    } else if (event.key === 'Home') {
+      nextIndex = 0
+    } else if (event.key === 'End') {
+      nextIndex = 1
+    } else {
+      return
+    }
+
+    event.preventDefault()
+    const nextAuthor = nextIndex === 0 ? 'user' : 'robot'
+    onAuthorChange(nextAuthor)
+    authorButtonRefs.current[nextIndex]?.focus()
   }
 
   return (
@@ -61,8 +87,13 @@ export default function ChatComposer({
                   type="button"
                   role="radio"
                   aria-checked={selected}
+                  tabIndex={selected ? 0 : -1}
                   aria-label={option === 'user' ? 'Mensagem do usuário' : 'Mensagem do robô'}
+                  ref={(element) => {
+                    if (element) authorButtonRefs.current[option === 'user' ? 0 : 1] = element
+                  }}
                   onClick={() => onAuthorChange(option)}
+                  onKeyDown={(event) => handleAuthorKeyDown(event, option)}
                   className={[
                     'rounded-full border px-3 py-1.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500',
                     selected
