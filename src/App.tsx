@@ -31,8 +31,8 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[#f1e4d2] px-3 py-3 text-stone-800 sm:px-4">
-      <div className="mx-auto flex h-[calc(100vh-1.5rem)] w-full max-w-2xl flex-col overflow-hidden rounded-2xl border border-stone-200 bg-[#f9f5f1] shadow-sm">
+      <div className="min-h-[var(--viewport-height)] bg-[#f1e4d2] px-3 py-3 text-stone-800 sm:px-4">
+      <div className="mx-auto flex h-[calc(var(--viewport-height)-1.5rem)] w-full max-w-2xl flex-col overflow-hidden rounded-2xl border border-stone-200 bg-[#f9f5f1] shadow-sm">
         <ChatHistory messages={messages} listRef={listRef} />
         <ChatComposer
           author={author}

@@ -112,7 +112,7 @@ As tarefas abaixo estão em ordem progressiva, alinhadas com a sequencia visual 
 - [x] Fase 2 — Histórico - bolhas, lista, empty state, auto-scroll
 - [x] Fase 3 — Input - card fixo, textarea auto-resize, envio
 - [x] Fase 4 — Toggles - componente, integração, borda roxa
-- [ ] Fase 5 — Polimento - ajustes visuais + lint/build
+- [x] Fase 5 — Polimento - ajustes visuais + lint/build
 
 ### Tarefa 1: Fundacao - tipos e layout base
 
@@ -153,10 +153,10 @@ As tarefas abaixo estão em ordem progressiva, alinhadas com a sequencia visual 
 
 ### Tarefa 5: Polimento - ajustes visuais e validação final
 
-- [ ] Revisar espaçamento, foco visível, contraste e responsividade em telas estreitas.
-- [ ] Confirmar que a última mensagem não fique encoberta pelo compositor e que o histórico continua rolável.
-- [ ] Executar `npm run lint` e `npm run build` para validar a base final.
-- [ ] Fazer verificação manual dos fluxos principais e do comportamento de recarga da página.
+- [x] Revisar espaçamento, foco visível, contraste e responsividade em telas estreitas.
+- [x] Confirmar que a última mensagem não fique encoberta pelo compositor e que o histórico continua rolável.
+- [x] Executar `npm run lint` e `npm run build` para validar a base final.
+- [x] Fazer verificação manual dos fluxos principais e do comportamento de recarga da página.
 
 **Pronto quando:** todos os critérios de aceite foram atendidos e a aplicação fica compilável e utilizável sem erros.
 

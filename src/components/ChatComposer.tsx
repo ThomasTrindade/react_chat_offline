@@ -64,7 +64,7 @@ export default function ChatComposer({
   }
 
   return (
-    <div className="border-t border-stone-200 bg-[#f9f7f5] px-3 pb-3 pt-3 sm:px-4">
+      <div className="shrink-0 border-t border-stone-200 bg-[#f9f7f5] px-3 pb-3 pt-3 sm:px-4">
       <form
         className={[
           'rounded-2xl border bg-white p-3 shadow-sm transition-colors duration-200 sm:p-4',

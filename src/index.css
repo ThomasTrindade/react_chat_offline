@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 
 :root {
+  --viewport-height: 100vh;
   font-family: Inter, 'Segoe UI', sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -10,6 +11,12 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@supports (height: 100dvh) {
+  :root {
+    --viewport-height: 100dvh;
+  }
 }
 
 html,
@@ -22,7 +29,7 @@ body,
 
 body {
   margin: 0;
-  min-height: 100vh;
+  min-height: var(--viewport-height);
   background: #f1e4d2;
 }
 
