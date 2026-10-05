@@ -1,4 +1,4 @@
-import { useEffect, useRef, type Dispatch, type KeyboardEvent, type SetStateAction } from 'react'
+import { useEffect, useRef, useState, type Dispatch, type KeyboardEvent, type SetStateAction } from 'react'
 import type { Author } from '../types/message'
 
 type ChatComposerProps = {
@@ -17,9 +17,23 @@ export default function ChatComposer({
   onSubmit,
 }: ChatComposerProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
-  const authorButtonRefs = useRef<HTMLButtonElement[]>([])
+  const authorDialogRef = useRef<HTMLDialogElement>(null)
+  const authorOptionRef = useRef<HTMLButtonElement>(null)
+  const [isAuthorDialogOpen, setIsAuthorDialogOpen] = useState(false)
   const isRobot = author === 'robot'
   const isDisabled = draft.trim().length === 0
+
+  useEffect(() => {
+    const dialog = authorDialogRef.current
+    if (!dialog) return
+
+    if (isAuthorDialogOpen && !dialog.open) {
+      dialog.showModal()
+      authorOptionRef.current?.focus()
+    } else if (!isAuthorDialogOpen && dialog.open) {
+      dialog.close()
+    }
+  }, [isAuthorDialogOpen])
 
   useEffect(() => {
     const textarea = textareaRef.current
@@ -38,33 +52,8 @@ export default function ChatComposer({
     }
   }
 
-  const handleAuthorKeyDown = (
-    event: KeyboardEvent<HTMLButtonElement>,
-    currentAuthor: Author,
-  ) => {
-    const currentIndex = currentAuthor === 'user' ? 0 : 1
-    let nextIndex = currentIndex
-
-    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
-      nextIndex = (currentIndex + 1) % 2
-    } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
-      nextIndex = (currentIndex + 1) % 2
-    } else if (event.key === 'Home') {
-      nextIndex = 0
-    } else if (event.key === 'End') {
-      nextIndex = 1
-    } else {
-      return
-    }
-
-    event.preventDefault()
-    const nextAuthor = nextIndex === 0 ? 'user' : 'robot'
-    onAuthorChange(nextAuthor)
-    authorButtonRefs.current[nextIndex]?.focus()
-  }
-
   return (
-      <div className="shrink-0 border-t border-stone-200 bg-[#f9f7f5] px-3 pb-3 pt-3 sm:px-4">
+    <div className="shrink-0 border-t border-stone-200 bg-[#f9f7f5] px-3 pb-3 pt-3 sm:px-4">
       <form
         className={[
           'rounded-2xl border bg-white p-3 shadow-sm transition-colors duration-200 sm:p-4',
@@ -78,36 +67,21 @@ export default function ChatComposer({
         }}
       >
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
-          <div className="flex items-center gap-2" role="radiogroup" aria-label="Selecionar autoria da mensagem">
-            {(['user', 'robot'] as Author[]).map((option) => {
-              const selected = author === option
-              return (
-                <button
-                  key={option}
-                  type="button"
-                  role="radio"
-                  aria-checked={selected}
-                  tabIndex={selected ? 0 : -1}
-                  aria-label={option === 'user' ? 'Mensagem do usuário' : 'Mensagem do robô'}
-                  ref={(element) => {
-                    if (element) authorButtonRefs.current[option === 'user' ? 0 : 1] = element
-                  }}
-                  onClick={() => onAuthorChange(option)}
-                  onKeyDown={(event) => handleAuthorKeyDown(event, option)}
-                  className={[
-                    'rounded-full border px-3 py-1.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500',
-                    selected
-                      ? option === 'user'
-                        ? 'border-emerald-400 bg-emerald-100 text-emerald-900'
-                        : 'border-violet-400 bg-violet-100 text-violet-900'
-                      : 'border-stone-300 bg-white text-stone-600 hover:bg-stone-50',
-                  ].join(' ')}
-                >
-                  {option === 'user' ? 'Usuário' : 'Robô'}
-                </button>
-              )
-            })}
-          </div>
+          <button
+            type="button"
+            aria-haspopup="dialog"
+            aria-label={`Autoria atual: ${isRobot ? 'Robô' : 'Usuário'}. Alterar autoria`}
+            onClick={() => setIsAuthorDialogOpen(true)}
+            className="flex min-h-11 items-center gap-2 self-start rounded-full border border-stone-300 bg-white py-1 pl-1 pr-3 text-sm font-medium text-stone-700 transition-colors hover:bg-stone-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500"
+          >
+            <span
+              aria-hidden="true"
+              className={`flex size-9 items-center justify-center rounded-full text-lg ${isRobot ? 'bg-violet-100' : 'bg-emerald-100'}`}
+            >
+              {isRobot ? '🤖' : '👤'}
+            </span>
+            {isRobot ? 'Robô' : 'Usuário'}
+          </button>
 
           <div className="flex min-w-0 flex-1 flex-col gap-2">
             <textarea
@@ -132,6 +106,51 @@ export default function ChatComposer({
           </div>
         </div>
       </form>
+
+      <dialog
+        ref={authorDialogRef}
+        aria-labelledby="author-dialog-title"
+        onCancel={() => setIsAuthorDialogOpen(false)}
+        onClose={() => setIsAuthorDialogOpen(false)}
+        className="m-auto w-[calc(100%-2rem)] max-w-sm rounded-2xl border border-stone-200 bg-white p-5 text-stone-800 shadow-xl backdrop:bg-stone-950/40"
+      >
+        <h2 id="author-dialog-title" className="text-lg font-semibold">
+          Como deseja enviar?
+        </h2>
+        <div className="mt-4 grid grid-cols-2 gap-3">
+          {(['user', 'robot'] as Author[]).map((option) => {
+            const selected = author === option
+            const label = option === 'user' ? 'Usuário' : 'Robô'
+            return (
+              <button
+                key={option}
+                ref={selected ? authorOptionRef : undefined}
+                type="button"
+                aria-pressed={selected}
+                onClick={() => {
+                  onAuthorChange(option)
+                  setIsAuthorDialogOpen(false)
+                }}
+                className={`flex min-h-24 flex-col items-center justify-center gap-2 rounded-xl border text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 ${
+                  selected
+                    ? option === 'robot'
+                      ? 'border-violet-400 bg-violet-50 text-violet-900'
+                      : 'border-emerald-400 bg-emerald-50 text-emerald-900'
+                    : 'border-stone-200 bg-white text-stone-700 hover:bg-stone-50'
+                }`}
+              >
+                <span
+                  aria-hidden="true"
+                  className={`flex size-12 items-center justify-center rounded-full text-2xl ${option === 'robot' ? 'bg-violet-100' : 'bg-emerald-100'}`}
+                >
+                  {option === 'robot' ? '🤖' : '👤'}
+                </span>
+                Enviar como {label}
+              </button>
+            )
+          })}
+        </div>
+      </dialog>
     </div>
   )
 }
